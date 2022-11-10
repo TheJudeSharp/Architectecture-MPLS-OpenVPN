@@ -1,0 +1,43 @@
+config t
+hostname P_8
+int Gi0/0
+ip add 192.168.58.2 255.255.255.0
+no shutdown
+int Gi1/0
+ip add 192.168.87.1 255.255.255.0
+no shutdown
+int Gi2/0
+ip add 192.168.84.1 255.255.255.0
+no shutdown
+int Loopback 0
+ip add 84.1.1.1 255.255.255.255
+exit
+
+int Gi0/0
+ip router isis
+isis network point-to-point
+isis circuit-type level-1
+int Gi1/0
+ip router isis
+isis network point-to-point
+isis circuit-type level-1
+int Gi2/0
+ip router isis
+isis network point-to-point
+isis circuit-type level-1
+router isis
+net 49.0001.0840.0100.1001.00
+passive-interface Loopback 0
+is-type level-1
+exit
+
+int Gi0/0
+mpls ip
+mpls ldp neighbor 15.1.1.1 pass Titan05@#
+int Gi1/0
+mpls ip
+mpls ldp neighbor 73.1.1.1 pass Titan05@#
+int Gi2/0
+mpls ip
+mpls ldp neighbor 46.1.1.1 pass Titan05@#
+end

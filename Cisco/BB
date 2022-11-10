@@ -1,0 +1,22 @@
+config t
+hostname Bafoussam_Branch
+int Se0/0
+ip add 192.168.1.1 255.255.255.0
+no shutdown
+int Eth1/0
+ip add 192.168.11.1 255.255.255.0
+no shutdown
+exit
+
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 192.168.11.0
+exit
+
+ip dhcp pool Bafoussam
+network 192.168.11.0 255.255.255.0
+default-router 192.168.11.1
+ip dhcp excluded-address 192.168.11.1 192.168.11.99
+end

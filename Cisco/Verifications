@@ -1,0 +1,16 @@
+
+show ip int brief
+show ip pro
+show ip rout
+
+show mpls ldp neighbor
+
+show ip vrf
+show ip pro vrf
+show ip rout vrf
+
+show ip bgp all
+
+show ip dhcp binding
+
+copy running-config startup-config

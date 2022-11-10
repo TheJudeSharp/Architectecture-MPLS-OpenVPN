@@ -1,0 +1,22 @@
+config t
+hostname Ebolowa_Branch
+int Se0/0
+ip add 192.168.6.2 255.255.255.0
+no shutdown
+int Eth1/0
+ip add 192.168.66.1 255.255.255.0
+no shutdown
+exit
+
+router rip
+version 1
+no auto-summary
+network 192.168.6.0
+network 192.168.66.0
+exit
+
+ip dhcp pool Ebolowa
+network 192.168.66.0 255.255.255.0
+default-router 192.168.66.1
+ip dhcp excluded-address 192.168.66.1 192.168.66.99
+end

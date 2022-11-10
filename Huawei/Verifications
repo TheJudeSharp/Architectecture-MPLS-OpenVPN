@@ -1,0 +1,14 @@
+
+display ip rout
+
+display isis peer
+display isis int
+
+display mpls int
+display mpls ldp
+
+quit
+save Huawei.cfg
+y
+y
+startup saved-configuration Huawei.cfg

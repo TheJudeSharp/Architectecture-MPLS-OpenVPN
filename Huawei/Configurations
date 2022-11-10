@@ -1,0 +1,464 @@
+
+==================================================================================
+PE 1
+==================================================================================
+sys
+sysname PE_1
+int Gi0/0/0
+ip add 192.168.15.1 24
+undo shut
+int Se4/0/0
+ip add 192.168.1.2 24
+undo shut
+int Se4/0/1
+ip add 192.168.2.2 24
+undo shut
+int Loopback 0
+ip add 12.1.1.1 32
+quit
+
+isis
+network 49.0001.0120.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 12.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+quit
+
+keychain Titan05@# mode absolute
+key-id 1
+algorithm md5
+quit
+quit
+mpls ldp
+authentication key-chain peer 15.1.1.1 name Titan05@#
+
+==================================================================================
+PE 2
+==================================================================================
+sys
+sysname PE_2
+int Gi0/0/0
+ip add 192.168.26.1 24
+undo shut
+int Se4/0/0
+ip add 192.168.3.2 24
+undo shut
+int Se4/0/1
+ip add 192.168.5.1 24
+undo shut
+int Loopback 0
+ip add 35.1.1.1 32
+quit
+
+isis
+network 49.0001.0350.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 35.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+quit
+
+==================================================================================
+PE 3
+==================================================================================
+sys
+sysname PE_3
+int Gi0/0/0
+ip add 192.168.73.2 24
+undo shut
+int Se4/0/0
+ip add 192.168.7.1 24
+undo shut
+int Se4/0/1
+ip add 192.168.8.1 24
+undo shut
+int Loopback 0
+ip add 78.1.1.1 32
+quit
+
+isis
+network 49.0001.0780.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 78.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+quit
+
+==================================================================================
+PE 4
+==================================================================================
+sys
+sysname PE_4
+int Gi0/0/0
+ip add 192.168.84.2 24
+undo shut
+int Se4/0/0
+ip add 192.168.4.2 24
+undo shut
+int Se4/0/1
+ip add 192.168.6.1 24
+undo shut
+int Loopback 0
+ip add 46.1.1.1 32
+quit
+
+isis
+network 49.0001.0460.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 46.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+quit
+
+==================================================================================
+P 5
+==================================================================================
+sys
+sysname P_5
+int Gi0/0/0
+ip add 192.168.15.2 24
+undo shut
+int Gi0/0/1
+ip add 192.168.56.1 24
+undo shut
+int Gi0/0/2
+ip add 192.168.58.1 24
+undo shut
+int Loopback 0
+ip add 15.1.1.1 32
+quit
+
+isis
+network 49.0001.0150.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/1
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/2
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 15.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+int Gi0/0/1
+mpls
+mpls ldp
+int Gi0/0/2
+mpls
+mpls ldp
+quit
+
+==================================================================================
+P 6
+==================================================================================
+sys
+sysname P_6
+int Gi0/0/0
+ip add 192.168.56.2 24
+undo shut
+int Gi0/0/1
+ip add 192.168.26.2 24
+undo shut
+int Gi0/0/2
+ip add 192.168.67.1 24
+undo shut
+int Loopback 0
+ip add 26.1.1.1 32
+quit
+
+isis
+network 49.0001.0260.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/1
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/2
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 26.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+int Gi0/0/1
+mpls
+mpls ldp
+int Gi0/0/2
+mpls
+mpls ldp
+quit
+
+==================================================================================
+P 7
+==================================================================================
+sys
+sysname P_7
+int Gi0/0/0
+ip add 192.168.67.2 24
+undo shut
+int Gi0/0/1
+ip add 192.168.73.1 24
+undo shut
+int Gi0/0/2
+ip add 192.168.87.2 24
+undo shut
+int Loopback 0
+ip add 73.1.1.1 32
+quit
+
+isis
+network 49.0001.0730.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/1
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/2
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 73.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+int Gi0/0/1
+mpls
+mpls ldp
+int Gi0/0/2
+mpls
+mpls ldp
+quit
+
+==================================================================================
+P 8
+==================================================================================
+sys
+sysname P_8
+int Gi0/0/0
+ip add 192.168.58.2 24
+undo shut
+int Gi0/0/1
+ip add 192.168.87.1 24
+undo shut
+int Gi0/0/2
+ip add 192.168.84.1 24
+undo shut
+int Loopback 0
+ip add 84.1.1.1 32
+quit
+
+isis
+network 49.0001.0840.0100.1001.00
+is-level level-1-2
+import-route direct
+quit
+int Gi0/0/0
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/1
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+int Gi0/0/2
+isis enable
+isis circuit-level level-1
+isis circuit-type p2p
+quit
+
+mpls lsr-id 84.1.1.1
+mpls
+lsp-trigger all
+quit
+mpls ldp
+quit
+int Gi0/0/0
+mpls
+mpls ldp
+int Gi0/0/1
+mpls
+mpls ldp
+int Gi0/0/2
+mpls
+mpls ldp
+quit
+
+==================================================================================
+Bafoussam Branch
+==================================================================================
+sys
+sysname Bafoussam_Branch
+int Se0/0/0
+ip add 192.168.1.1 24
+undo shut
+quit
+
+==================================================================================
+Bafoussam HQ
+==================================================================================
+sys
+sysname Bafoussam_HQ
+int Se0/0/0
+ip add 192.168.3.1 24
+undo shut
+quit
+
+==================================================================================
+Douala Branch
+==================================================================================
+sys
+sysname Douala_Branch
+int Se0/0/0
+ip add 192.168.2.1 24
+undo shut
+quit
+
+==================================================================================
+Douala HQ
+==================================================================================
+sys
+sysname Douala_HQ
+int Se0/0/0
+ip add 192.168.4.1 24
+undo shut
+quit
+
+==================================================================================
+Yaounde HQ
+==================================================================================
+sys
+sysname Yaounde_HQ
+int Se0/0/0
+ip add 192.168.5.2 24
+undo shut
+quit
+
+==================================================================================
+Yaounde Branch
+==================================================================================
+sys
+sysname Yaounde_Branch
+int Se0/0/0
+ip add 192.168.7.2 24
+undo shut
+quit
+
+==================================================================================
+Ebolowa Branch
+==================================================================================
+sys
+sysname Ebolowa_Branch
+int Se0/0/0
+ip add 192.168.6.2 24
+undo shut
+quit
+
+==================================================================================
+Ebolowa HQ
+==================================================================================
+sys
+sysname Ebolowa_HQ
+int Se0/0/0
+ip add 192.168.8.2 24
+undo shut
+quit

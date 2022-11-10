@@ -1,0 +1,35 @@
+
+CTRL + C
+nano /etc/netplan/01-netcfg.yaml
+
+    | dhcp4: no
+    | addresses:
+        - 192.168.152.3/24
+    | gateway4: 192.168.152.2
+    | nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+
+netplan apply
+ifconfig
+ovpn-init
+
+    | yes
+    |
+    | 2
+    |
+    |
+    |
+    |
+    |
+    |
+    |
+    |
+
+apt-mark unhold openvpn-as
+apt update
+apt upgrade
+
+    | yes
+
+apt-mark hold openvpn-as
+dpkg-reconfigure tzdata

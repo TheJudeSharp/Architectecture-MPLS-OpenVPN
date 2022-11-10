@@ -1,0 +1,85 @@
+config t
+hostname PE_2
+int Gi0/0
+ip add 192.168.26.1 255.255.255.0
+no shutdown
+int Se1/0
+ip add 192.168.3.2 255.255.255.0
+no shutdown
+int Se1/1
+ip add 192.168.5.1 255.255.255.0
+no shutdown
+int Loopback 0
+ip add 35.1.1.1 255.255.255.255
+exit
+
+int Gi0/0
+ip router isis
+isis network point-to-point
+isis circuit-type level-1
+router isis
+net 49.0001.0350.0100.1001.00
+passive-interface Loopback 0
+is-type level-1-2
+exit
+
+int Gi0/0
+mpls ip
+mpls ldp neighbor 26.1.1.1 pass Titan05@#
+no mpls ip propagate-ttl
+
+ip vrf YAOUNDE
+rd 333:333
+route-target both 333:333
+int Se1/1
+ip vrf forwarding YAOUNDE
+ip add 192.168.5.1 255.255.255.0
+no shutdown
+exit
+ip vrf BAFOUSSAM
+rd 111:111
+route-target both 111:111
+int Se1/0
+ip vrf forwarding BAFOUSSAM
+ip add 192.168.3.2 255.255.255.0
+no shutdown
+exit
+
+router rip
+version 2
+no auto-summary
+address-family ipv4 vrf BAFOUSSAM
+network 192.168.3.0
+router eigrp 1
+address-family ipv4 vrf YAOUNDE
+autonomous-system 1
+no auto-summary
+network 192.168.5.0 0.0.0.255
+exit
+
+router bgp 1
+neighbor 12.1.1.1 remote 1
+neighbor 12.1.1.1 update-source Loopback 0
+address-family vpnv4
+neighbor 12.1.1.1 activate
+neighbor 12.1.1.1 send-community both
+router bgp 1
+neighbor 78.1.1.1 remote 1
+neighbor 78.1.1.1 update-source Loopback 0
+address-family vpnv4
+neighbor 78.1.1.1 activate
+neighbor 78.1.1.1 send-community both
+exit
+
+router bgp 1
+address-family ipv4 vrf BAFOUSSAM
+redistribute rip
+address-family ipv4 vrf YAOUNDE
+redistribute eigrp 1
+router rip
+address-family ipv4 vrf BAFOUSSAM
+redistribute bgp 1 metric transparent
+router eigrp 1
+address-family ipv4 vrf YAOUNDE
+redistribute bgp 1 metric 1 1 1 1 1
+end

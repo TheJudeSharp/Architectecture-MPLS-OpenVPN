@@ -1,0 +1,20 @@
+config t
+hostname Douala_Branch
+int Se0/0
+ip add 192.168.4.1 255.255.255.0
+no shutdown
+int Eth1/0
+ip add 192.168.44.1 255.255.255.0
+no shutdown
+exit
+
+router ospf 1
+network 192.168.4.0 0.0.0.255 area 0
+network 192.168.44.0 0.0.0.255 area 0
+exit
+
+ip dhcp pool Douala
+network 192.168.44.0 255.255.255.0
+default-router 192.168.44.1
+ip dhcp excluded-address 192.168.44.1 192.168.44.99
+end

@@ -1,0 +1,21 @@
+config t
+hostname Yaounde_HQ
+int Se0/0
+ip add 192.168.5.2 255.255.255.0
+no shutdown
+int Eth1/0
+ip add 192.168.55.1 255.255.255.0
+no shutdown
+exit
+
+router eigrp 1
+no auto-summary
+network 192.168.5.0 0.0.0.255
+network 192.168.55.0 0.0.0.255
+exit
+
+ip dhcp pool Yaounde
+network 192.168.55.0 255.255.255.0
+default-router 192.168.55.1
+ip dhcp excluded-address 192.168.55.1 192.168.55.99
+end
